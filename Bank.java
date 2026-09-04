@@ -45,8 +45,13 @@ public class Bank {
         //
         // ห้ามแก้ด้วยการเอาล็อกใบใดใบหนึ่งออก — ยอดรวมจะเพี้ยน
         // ---------------------------------------------------------------
-        synchronized (from) {
-            synchronized (to) {
+        
+        Account first = from;
+        Account second  = to;
+        if(from.id() > to.id())
+
+        synchronized (first) {
+            synchronized (second) {
                 if (!from.withdraw(amount)) {
                     return false;
                 }
@@ -54,5 +59,6 @@ public class Bank {
                 return true;
             }
         }
+        return false;
     }
 }
